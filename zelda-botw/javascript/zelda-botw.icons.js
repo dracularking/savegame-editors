@@ -49,8 +49,9 @@ var BOTW_Icons=(function(){
 	var REPEAT_ARMOR_ICONS_2=['001','005','006','008','009','011','012','014','017','020','021','024','025','026','027','028','029','046','048','049','116','141','200','205','210','215','220','225','230','181','182','183','184'];
 
 	var loadedImages={};
-	var pendingImages=23;
+	var pendingImages=Object.keys(ICONS).length;
 	var isLoaded=false;
+	var hasStartedLoading=false;
 
 
 	var canvas=document.createElement('canvas');
@@ -58,15 +59,21 @@ var BOTW_Icons=(function(){
 	canvas.height=ICON_SIZE;
 	return{
 		startLoadingIcons:function(){
-			if(!isLoaded){
-				for(fileName in ICONS){
+			if(!isLoaded && !hasStartedLoading){
+				hasStartedLoading=true;
+				var onImageDone=function(){
+					pendingImages--;
+					if(pendingImages===0){
+						isLoaded=true;
+						BOTW_Icons.refreshAllIcons();
+					}
+				};
+				for(var fileName in ICONS){
 					loadedImages[fileName]=new Image();
-					loadedImages[fileName].addEventListener('load', function(){
-						pendingImages--;
-						if(pendingImages===0){
-							isLoaded=true;
-							BOTW_Icons.refreshAllIcons();
-						}
+					loadedImages[fileName].addEventListener('load', onImageDone, false);
+					loadedImages[fileName].addEventListener('error', function(){
+						console.error('BOTW_Icons failed loading image', this.src);
+						onImageDone();
 					}, false);
 					loadedImages[fileName].src=IMG_PATH+fileName+'.png';
 				}
@@ -75,12 +82,9 @@ var BOTW_Icons=(function(){
 
 		setIcon:function(el,itemNameId, dyeColor){
 			if(isLoaded){
-				if(dyeColor)
-					el.src=this._getItemIcon(itemNameId, dyeColor);
-				else
-					el.src=this._getItemIcon(itemNameId);
+				this._setSpriteIcon(el, itemNameId, dyeColor);
 			}else{
-				el.nextSrc={id:itemNameId};
+				el.nextSrc={id:itemNameId, dyeColor:dyeColor};
 			}
 		},
 
@@ -90,12 +94,31 @@ var BOTW_Icons=(function(){
 		refreshAllIcons:function(){
 			var iconId=0;
 			while(document.getElementById('icon'+iconId)){
-				document.getElementById('icon'+iconId).src=this._getItemIcon(document.getElementById('icon'+iconId).nextSrc.id);
+				var el=document.getElementById('icon'+iconId);
+				if(el.nextSrc && el.nextSrc.id){
+					this._setSpriteIcon(el, el.nextSrc.id, el.nextSrc.dyeColor);
+				}
 				iconId++;
 			}
 		},
 
-		_getItemIcon:function(itemNameId, clothesColor){
+		_setSpriteIcon:function(el,itemNameId,clothesColor){
+			var iconData=this._getItemIconData(itemNameId, clothesColor);
+			if(!iconData){
+				el.src=this.getBlankIcon();
+				el.style.objectFit='';
+				el.style.objectPosition='';
+				return;
+			}
+
+			el.src=IMG_PATH+iconData.fileName+'.png';
+			el.width=ICON_SIZE;
+			el.height=ICON_SIZE;
+			el.style.objectFit='none';
+			el.style.objectPosition='-'+((iconData.icon%ICON_COLS)*ICON_SIZE)+'px -'+(parseInt(iconData.icon/ICON_COLS)*ICON_SIZE)+'px';
+		},
+
+		_getItemIconData:function(itemNameId, clothesColor){
 			var fileName,id,match;
 			if(match=itemNameId.match(/^Armor_([0-9]{3})_(Head|Upper|Lower)(_Dye[0-9]{2})?/)){
 				fileName='Armor_'+match[2];
@@ -140,22 +163,15 @@ var BOTW_Icons=(function(){
 				icon=ICONS[fileName].indexOf(id);
 
 			if(icon===-1){
-				return this.getBlankIcon()
+				return null;
 			}
 
 			/* add dye */
 			if(itemNameId.startsWith('Armor_') && clothesColor && clothesColor<=15){
 				icon+=clothesColor;
 			}
-
-			if(isLoaded){
-				var img=loadedImages[fileName];
-				canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
-				canvas.getContext('2d').drawImage(img, (icon%ICON_COLS)*ICON_SIZE, parseInt(icon/ICON_COLS)*ICON_SIZE, ICON_SIZE, ICON_SIZE, 0, 0, ICON_SIZE, ICON_SIZE);
-				return canvas.toDataURL();
-			}
+			return {fileName:fileName, icon:icon};
 		},
-
 		getBlankIcon:function(){return './assets/_blank.png'},
 	}
 }());

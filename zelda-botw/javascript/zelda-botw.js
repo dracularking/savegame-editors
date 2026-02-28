@@ -284,7 +284,7 @@ SavegameEditor={
 		if(type==='bows')
 			return this.Offsets.FLAGS_BOW;
 		else if(type==='shields')
-			return this.Offsets.FLAGS_SHIELDS;
+			return this.Offsets.FLAGS_SHIELD;
 		else
 			return this.Offsets.FLAGS_WEAPON;
 	},

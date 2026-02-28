@@ -17,7 +17,7 @@
 	<script type="text/javascript" src="./javascript/zelda-botw.score.js"></script>
 	<script type="text/javascript"><!--
 		/* service worker */
-		var FORCE_HTTPS=true;
+		var FORCE_HTTPS=(location.hostname!=='localhost' && location.hostname!=='127.0.0.1');
 		window.addEventListener('load',function(){
 			if(location.protocol==='http:' && FORCE_HTTPS)
 				location.replace(window.location.href.replace('http:','https:'));

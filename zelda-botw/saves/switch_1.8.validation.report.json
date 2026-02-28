@@ -1,0 +1,243 @@
+{
+  "input": "saves\\game_data_switch_1.8.sav",
+  "output": "saves\\validated_switch_1.8.sav",
+  "summary": {
+    "total": 33,
+    "pass": 33,
+    "fail": 0,
+    "missing": 0
+  },
+  "checks": [
+    {
+      "name": "stat.RUPEES",
+      "status": "PASS",
+      "offset": "0xeaf8",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "stat.MONS",
+      "status": "PASS",
+      "offset": "0xd7fb8",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "stat.MAX_HEARTS",
+      "status": "PASS",
+      "offset": "0x10970",
+      "expected": 13,
+      "actual": 13
+    },
+    {
+      "name": "stat.MAX_STAMINA",
+      "status": "PASS",
+      "offset": "0x503c8",
+      "expected": 1148846081,
+      "actual": 1148846081
+    },
+    {
+      "name": "stat.RELIC_GERUDO",
+      "status": "PASS",
+      "offset": "0x89978",
+      "expected": 4,
+      "actual": 4
+    },
+    {
+      "name": "stat.RELIC_GORON",
+      "status": "PASS",
+      "offset": "0xe7bb8",
+      "expected": 4,
+      "actual": 4
+    },
+    {
+      "name": "stat.RELIC_RITO",
+      "status": "PASS",
+      "offset": "0xf9cf0",
+      "expected": 4,
+      "actual": 4
+    },
+    {
+      "name": "stat.KOROK_SEED_COUNTER",
+      "status": "PASS",
+      "offset": "0x84910",
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "name": "stat.DEFEATED_HINOX_COUNTER",
+      "status": "PASS",
+      "offset": "0x5ab78",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "stat.DEFEATED_TALUS_COUNTER",
+      "status": "PASS",
+      "offset": "0x70e90",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "stat.DEFEATED_MOLDUGA_COUNTER",
+      "status": "PASS",
+      "offset": "0x53b00",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "toggle.MOTORCYCLE",
+      "status": "PASS",
+      "offset": "0xd2670",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "pos.PLAYER_X",
+      "status": "PASS",
+      "offset": "0xc3c00",
+      "expected": 1234.5,
+      "actual": 1234.5
+    },
+    {
+      "name": "pos.PLAYER_Y",
+      "status": "PASS",
+      "offset": "0xc3c08",
+      "expected": 67.5,
+      "actual": 67.5
+    },
+    {
+      "name": "pos.PLAYER_Z",
+      "status": "PASS",
+      "offset": "0xc3c10",
+      "expected": -890.25,
+      "actual": -890.25
+    },
+    {
+      "name": "pos.HORSE_X",
+      "status": "PASS",
+      "offset": "0x89a90",
+      "expected": 456.75,
+      "actual": 456.75
+    },
+    {
+      "name": "pos.HORSE_Y",
+      "status": "PASS",
+      "offset": "0x89a98",
+      "expected": 12.125,
+      "actual": 12.125
+    },
+    {
+      "name": "pos.HORSE_Z",
+      "status": "PASS",
+      "offset": "0x89aa0",
+      "expected": -33.875,
+      "actual": -33.875
+    },
+    {
+      "name": "coord.MAP",
+      "status": "PASS",
+      "offset": "0x44a0",
+      "expected": "MainField",
+      "actual": "MainField"
+    },
+    {
+      "name": "coord.MAPTYPE",
+      "status": "PASS",
+      "offset": "0xdc670",
+      "expected": "MainFieldDungeon",
+      "actual": "MainFieldDungeon"
+    },
+    {
+      "name": "items.slot0.NAME",
+      "status": "PASS",
+      "offset": "0x60408",
+      "expected": "Weapon_Sword_001",
+      "actual": "Weapon_Sword_001"
+    },
+    {
+      "name": "items.slot0.QUANTITY",
+      "status": "PASS",
+      "offset": "0x711d0",
+      "expected": 803,
+      "actual": 803
+    },
+    {
+      "name": "mod.WEAPON.FLAG",
+      "status": "PASS",
+      "offset": "0x5dd20",
+      "expected": 131072,
+      "actual": 131072
+    },
+    {
+      "name": "mod.WEAPON.VALUE",
+      "status": "PASS",
+      "offset": "0xc4c78",
+      "expected": 50,
+      "actual": 50
+    },
+    {
+      "name": "mod.BOW.FLAG",
+      "status": "PASS",
+      "offset": "0x4990",
+      "expected": 65536,
+      "actual": 65536
+    },
+    {
+      "name": "mod.BOW.VALUE",
+      "status": "PASS",
+      "offset": "0xb1e0",
+      "expected": 30,
+      "actual": 30
+    },
+    {
+      "name": "mod.SHIELD.FLAG",
+      "status": "PASS",
+      "offset": "0xd1048",
+      "expected": 262144,
+      "actual": 262144
+    },
+    {
+      "name": "mod.SHIELD.VALUE",
+      "status": "PASS",
+      "offset": "0x710a0",
+      "expected": 20,
+      "actual": 20
+    },
+    {
+      "name": "horse.slot0.NAME",
+      "status": "PASS",
+      "offset": "0x7e648",
+      "expected": "GameRomHorseNushi",
+      "actual": "GameRomHorseNushi"
+    },
+    {
+      "name": "horse.slot0.SADDLE",
+      "status": "PASS",
+      "offset": "0x4a008",
+      "expected": "GameRomHorseSaddle_10",
+      "actual": "GameRomHorseSaddle_10"
+    },
+    {
+      "name": "horse.slot0.REINS",
+      "status": "PASS",
+      "offset": "0x6e190",
+      "expected": "GameRomHorseReins_10",
+      "actual": "GameRomHorseReins_10"
+    },
+    {
+      "name": "horse.slot0.TYPE",
+      "status": "PASS",
+      "offset": "0xcfe50",
+      "expected": "GameRomHorse00L",
+      "actual": "GameRomHorse00L"
+    },
+    {
+      "name": "horse.slot0.MANE",
+      "status": "PASS",
+      "offset": "0xc1178",
+      "expected": "Horse_Link_Mane_00L",
+      "actual": "Horse_Link_Mane_00L"
+    }
+  ]
+}

@@ -168,10 +168,18 @@ var BOTWMasterEditor=(function(){
 			return loaded;
 		},
 		loadHashes:function(){
+			if(location.protocol==='file:'){
+				alert('Master editor requires HTTP/HTTPS due browser CORS restrictions. Start a local server and open this page via http://localhost.');
+				return;
+			}
+
 			if(typeof window.fetch==='function'){
 				fetch('./javascript/zelda-botw.hashes.csv')
-					.then(res => res.text()) // Gets the response and returns it as a blob
-					.then(responseText => {
+					.then(function(res){
+						if(!res.ok) throw new Error('HTTP '+res.status);
+						return res.text();
+					})
+					.then(function(responseText){
 						parseHashFile(responseText);
 					})
 					.catch(function(){
@@ -182,15 +190,15 @@ var BOTWMasterEditor=(function(){
 				oReq.open('GET', './javascript/zelda-botw.hashes.csv', true);
 				oReq.responseType='text';
 
-				oReq.onload=function(oEvent){
-					if(this.status===200) {
-						parseHashFile(responseText);
+				oReq.onload=function(){
+					if(this.status===200 || this.status===0) {
+						parseHashFile(this.responseText || this.response);
 					}else{
 						alert('Unexpected error: can\'t download hash file');
 					}
 				};
 
-				oReq.onerror=function(oEvent){
+				oReq.onerror=function(){
 					alert('Unexpected error: can\'t download hash file');
 				};
 
