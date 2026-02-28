@@ -9,12 +9,12 @@
 	<link rel="shortcut icon" href="./favicon.png"/>
 	<link type="text/css" rel="stylesheet" href="./zelda-botw.css" media="all"/>
 	<script type="text/javascript" src="../savegame-editor.js"></script>
-	<script type="text/javascript" src="./zelda-botw.js"></script>
-	<script type="text/javascript" src="./zelda-botw.data.js"></script>
-	<script type="text/javascript" src="./zelda-botw.locations.js"></script>
-	<script type="text/javascript" src="./zelda-botw.icons.js"></script>
-	<script type="text/javascript" src="./zelda-botw.master.js"></script>
-	<script type="text/javascript" src="./zelda-botw.score.js"></script>
+	<script type="text/javascript" src="./javascript/zelda-botw.js"></script>
+	<script type="text/javascript" src="./javascript/zelda-botw.data.js"></script>
+	<script type="text/javascript" src="./javascript/zelda-botw.locations.js"></script>
+	<script type="text/javascript" src="./javascript/zelda-botw.icons.js"></script>
+	<script type="text/javascript" src="./javascript/zelda-botw.master.js"></script>
+	<script type="text/javascript" src="./javascript/zelda-botw.score.js"></script>
 	<script type="text/javascript"><!--
 		/* service worker */
 		var FORCE_HTTPS=true;
@@ -22,7 +22,7 @@
 			if(location.protocol==='http:' && FORCE_HTTPS)
 				location.replace(window.location.href.replace('http:','https:'));
 			else if(location.protocol==='https:' && 'serviceWorker' in navigator)
-				navigator.serviceWorker.register('/savegame-editors/zelda-botw/_cache_service_worker.js', {scope: '/savegame-editors/zelda-botw/'});
+				navigator.serviceWorker.register('/savegame-editors/zelda-botw/javascript/_cache_service_worker.js', {scope: '/savegame-editors/zelda-botw/'});
 		}, false);
 	--></script>
 </head>
@@ -366,3 +366,4 @@
 
 </body>
 </html>
+

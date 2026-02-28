@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^python - <<'PYTHON'\nimport struct,re\n# load data\nwith open\\('game_data_switch_1\\.8\\.sav','rb'\\) as f:\n    s=f\\.read\\(\\)\nhashes=\\[\\(int\\(m\\.group\\(1\\),16\\),m\\.group\\(2\\)\\) for m in re\\.finditer\\(r'0x\\(\\[0-9a-fA-F\\]\\+\\)\\\\s\\*,\\\\s\\*\\\\\\\\'\\(\\[A-Za-z0-9_\\]\\+\\)\\\\\\\\'', open\\('zelda-botw\\.js'\\)\\.read\\(\\)\\)\\]\n\ns_offsets=\\{\\}\nfor h,name in hashes:\n    le=struct\\.pack\\('<I',h\\)\n    idx=s\\.find\\(le,0x0c\\)\n    if idx!=-1:\n        s_offsets\\[name\\]=idx\\+4\nprint\\('Switch offsets rupees', s_offsets\\.get\\('RUPEES'\\)\\)\nqty_off=s_offsets\\.get\\('ITEMS_QUANTITY'\\)\nprint\\('Switch ITEMS_QUANTITY',qty_off\\)\nif qty_off:\n    print\\(\\[hex\\(struct\\.unpack\\('<I',s\\[qty_off\\+i\\*8:qty_off\\+i\\*8\\+4\\]\\)\\[0\\]\\) for i in range\\(3\\)\\]\\)\nPYTHON$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

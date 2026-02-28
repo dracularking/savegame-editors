@@ -169,7 +169,7 @@ var BOTWMasterEditor=(function(){
 		},
 		loadHashes:function(){
 			if(typeof window.fetch==='function'){
-				fetch('./zelda-botw.hashes.csv')
+				fetch('./javascript/zelda-botw.hashes.csv')
 					.then(res => res.text()) // Gets the response and returns it as a blob
 					.then(responseText => {
 						parseHashFile(responseText);
@@ -179,7 +179,7 @@ var BOTWMasterEditor=(function(){
 					});
 			}else{
 				var oReq=new XMLHttpRequest();
-				oReq.open('GET', './zelda-botw.hashes.csv', true);
+				oReq.open('GET', './javascript/zelda-botw.hashes.csv', true);
 				oReq.responseType='text';
 
 				oReq.onload=function(oEvent){
