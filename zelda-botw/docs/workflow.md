@@ -46,3 +46,93 @@
 4. 把找到的地址保存到 `SavegameEditor.Offsets`，后续界面渲染与修改使用这些偏移。
 
 这种基于动态扫描哈希的机制让编辑器既能识别版本，也能适应版本间的字段移动，不需要写死常量表。
+
+## 本地启动与访问（开发调试）
+
+### 1) 在项目目录启动（推荐）
+在 `h:\codespace\game\savegame-editors\zelda-botw` 目录执行：
+
+```bash
+python -m http.server 5500
+```
+
+浏览器访问：
+
+```text
+http://127.0.0.1:5500/
+```
+
+### 2) 在上一级目录启动
+在 `h:\codespace\game\savegame-editors` 目录执行：
+
+```bash
+python -m http.server 5500
+```
+
+浏览器访问：
+
+```text
+http://127.0.0.1:5500/zelda-botw/
+```
+
+### 常见问题
+
+- `ERR_SSL_PROTOCOL_ERROR`
+  - 原因：本地服务是 HTTP，但地址被打开成了 `https://...`。
+  - 处理：改用 `http://127.0.0.1:5500/...`，不要用 `https://`。
+
+- `Master editor requires HTTP/HTTPS ... CORS restrictions`
+  - 原因：使用 `file://` 直接打开页面时，`master` 标签需要加载 `javascript/zelda-botw.hashes.csv`，会被浏览器 CORS 限制。
+  - 处理：通过本地 HTTP 服务访问页面（如上两种方式），不要用 `file://`。
+
+### 功能影响说明
+
+- 普通编辑功能（物品、词条、坐标等）在 `file://` 下通常可用。
+- `Master editor` 依赖加载 `zelda-botw.hashes.csv`，建议始终在 HTTP 环境使用。
+
+### 3) 一键启动（Windows）
+在项目根目录双击：
+
+```text
+start-local.bat
+```
+
+若你还没创建该文件，可使用下面内容：
+
+```bat
+@echo off
+setlocal
+set "PROJECT_DIR=%~dp0"
+for %%I in ("%PROJECT_DIR%..") do set "ROOT_DIR=%%~fI"
+cd /d "%ROOT_DIR%"
+start "" "http://127.0.0.1:5500/zelda-botw/"
+python -m http.server 5500
+```
+
+## 打包为可执行文件（EXE）
+
+### 方案：内嵌本地服务 + 桌面窗口
+项目已提供：
+
+```text
+desktop_app.py
+build-exe.bat
+```
+
+在项目根目录双击：
+
+```text
+build-exe.bat
+```
+
+打包成功后输出：
+
+```text
+dist\\BOTWSaveEditor.exe
+```
+
+说明：
+- `desktop_app.py` 会在本机启动一个仅本地可访问的 HTTP 服务并打开桌面窗口。
+- 不再需要手动开浏览器输入地址。
+- 仍保留你现有的前端代码结构（`index.html + javascript + assets`）。
+
